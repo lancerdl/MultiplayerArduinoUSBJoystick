@@ -222,8 +222,8 @@ void loop()
    * Send report.
    */
   if (force_send ||
-      memcmp(&joy_state, &prev_joy_state,
-             sizeof(joystick_state_t)*IF_NUM)) {
+    memcmp(&joy_state, &prev_joy_state,
+           sizeof(joystick_state_t)*IF_NUM)) {
     for (if_ix = IF_FIRST; if_ix < IF_NUM; if_ix++) {
       send_joystick_state(if_ix);
     }
