@@ -80,31 +80,21 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM Joystick_report_format[] =
     0x05, 0x01,          /*     Usage Page (Generic Desktop)                 */
     0x09, 0x30,          /*     Usage (X)                                    */
     0x09, 0x31,          /*     Usage (Y)                                    */
-    0x15, 0x80,          /*     Logical Minimum (-128)                       */
-    0x25, 0x7F,          /*     Logical Maximum (127)                        */
+    0x15, 0x00,          /*     Logical Minimum (0)                          */
+    0x25, 0x64,          /*     Logical Maximum (100)                        */
     0x75, 0x08,          /*     Report Size (8)                              */
     0x95, 0x02,          /*     Report Count (2)                             */
     0x81, 0x82,          /*     Input (Data, Variable, Absolute, Volatile)   */
     0xC0,                /*   End Collection                                 */
 
-    /* 6 game buttons. */
+    /* 8 game buttons. */
     0x05, 0x09,          /*   Usage Page (Button)                            */
     0x19, 0x01,          /*   Usage Minimum (1)                              */
-    0x29, 0x06,          /*   Usage Maximum (6)                              */
-    0x15, 0x00,          /*   Logical Minimum (0)                            */
-    0x25, 0x01,          /*   Logical Maximum (1)                            */
-    0x75, 0x01,          /*   Report Size (1)                                */
-    0x95, 0x06,          /*   Report Count (6)                               */
-    0x81, 0x02,          /*   Input (Data, Variable, Absolute)               */
-
-    /* 2 auxiliary buttons. */
-    0x05, 0x09,          /*   Usage Page (Button)                            */
-    0x19, 0x07,          /*   Usage Minimum (7)                              */
     0x29, 0x08,          /*   Usage Maximum (8)                              */
     0x15, 0x00,          /*   Logical Minimum (0)                            */
     0x25, 0x01,          /*   Logical Maximum (1)                            */
     0x75, 0x01,          /*   Report Size (1)                                */
-    0x95, 0x02,          /*   Report Count (2)                               */
+    0x95, 0x08,          /*   Report Count (8)                               */
     0x81, 0x02,          /*   Input (Data, Variable, Absolute)               */
 
     0xC0                 /* End Collection                                   */
@@ -522,7 +512,7 @@ uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
         }
 
         break;
-    case HID_DTYPE_Report: 
+    case HID_DTYPE_Report:
         /* All reports are the same size, so no need to use wIndex. */
         address = (void*)&Joystick_report_format;
         size    = sizeof(Joystick_report_format);

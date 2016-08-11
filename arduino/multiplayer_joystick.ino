@@ -15,6 +15,10 @@ uint64_t last_sync_timestamp;
 #define PIN_FIRST           2
 #define PINS_PER_JOYSTICK   12
 
+#define JOY_LEFT_UP         0
+#define JOY_CENTRE          50
+#define JOY_RIGHT_DOWN      100
+
 typedef enum interface_id_e_ {
   IF_FIRST = 0,
   IF_0     = IF_FIRST,
@@ -154,13 +158,13 @@ void update_joystick_state(int if_ix)
     val1 = digitalRead(pin);
     val2 = digitalRead(pin + 1);
     if ((val1 == 0) && (val2 == 0)) { /* Both activated; cancel */
-      state->axis[ix] = 0;
+      state->axis[ix] = JOY_CENTRE;
     } else if (val1 == 0) { /* Left/Up activated */
-      state->axis[ix] = -127;
+      state->axis[ix] = JOY_LEFT_UP;
     } else if (val2 == 0) { /* Right/Down activated */
-      state->axis[ix] = 127;
+      state->axis[ix] = JOY_RIGHT_DOWN;
     } else { /* Centred */
-      state->axis[ix] = 0;
+      state->axis[ix] = JOY_CENTRE;
     }
   }
 
